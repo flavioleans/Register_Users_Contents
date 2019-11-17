@@ -5,7 +5,7 @@ const Sequelize = require('sequelize')
 
 //config template Egine handlebars
 app.engine('handlebars', handlebars({defaultLayout: 'main'}))
-app.set('view engine', 'handlebears')
+app.set('view engine', 'handlebars')
 
 //connection DB
 const sequelize = new Sequelize('register_users', 'root', 'admin', {
@@ -14,10 +14,11 @@ const sequelize = new Sequelize('register_users', 'root', 'admin', {
 })
 
 //Rotas
-app.get('/register', function(res, req){
-    res.setEncoding("")
+app.get('/register', function(req, res){
+    res.render('layouts/form')
 })
 
+//Models
 const Post = sequelize.define('posts', {
     title: {
         type: Sequelize.STRING
