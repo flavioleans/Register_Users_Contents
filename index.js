@@ -2,6 +2,7 @@ const express = require('express')
 const app = express();
 const handlebars = require('express-handlebars')
 const bodyParser = require('body-parser')
+const Post = require('./models/PostModel')
 
 //config template Egine handlebars
 app.engine('handlebars', handlebars({defaultLayout: 'main'}))
@@ -13,12 +14,24 @@ app.use(bodyParser.json())
 
 
 //Rotas
+app.get('/', function(req, res){
+    res.render('layouts/home')
+})
+
 app.get('/register', function(req, res){
     res.render('layouts/form')
 })
 
 app.post('/postlist', function(req, res){
-    res.send("Title: "+req.body.title+" Description: "+req.body.comment)
+    Post.create({
+        title: req.body.title,
+        comment: req.body.comment
+    }).then(function(){
+       // res.send("comment successfully created")  Sucess Page
+       res.redirect('/')
+    }).catch(function(erro){
+        res.send("Error found"+erro)
+    }) 
 })
 
 
