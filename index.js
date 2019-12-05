@@ -15,8 +15,8 @@ app.use(bodyParser.json())
 
 //Rotas
 app.get('/', function(req, res){
-    Post.all().then(function(posts){ //posts -> pode ser qualquer nome
-        res.render('home', {postes: posts})
+    Post.findAll().then(function(posts){ //posts -> pode ser qualquer nome
+        res.render('layouts/home', {post: posts})
     })
 })
 
