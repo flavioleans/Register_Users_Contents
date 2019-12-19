@@ -15,7 +15,7 @@ app.use(bodyParser.json())
 
 //Rotas
 app.get('/', function(req, res){
-    Post.findAll().then(function(posts){ //posts -> pode ser qualquer nome
+    Post.findAll({order: [['id', 'DESC']]}).then(function(posts){ //posts -> pode ser qualquer nome
         res.render('layouts/home', {post: posts})
     })
 })
@@ -34,6 +34,14 @@ app.post('/postlist', function(req, res){
     }).catch(function(erro){
         res.send("Error found"+erro)
     }) 
+})
+//Delete posts
+app.get('/delete/:id', function(req, res){
+    Post.destroy({where: {'id': req.params.id}}).then(function(){
+        res.send("Post Deleted!")
+    }).catch(function(erro){
+        res.send("Post not exists")
+    })
 })
 
 

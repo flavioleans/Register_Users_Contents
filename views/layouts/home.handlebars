@@ -3,5 +3,7 @@
 {{#each post}}
     <h1>Title: {{title}}</h1>
     <p>Comments: {{comment}}</p>
+    <H5>Created: {{createdAt}}</H5>
+   <a href="/delete/{{id}}"><button>Delete</button></a>
     <hr>
 {{/each}}
